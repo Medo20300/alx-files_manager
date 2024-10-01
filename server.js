@@ -1,10 +1,14 @@
-const express = require('express');
+#!/usr/bin/node
 
-const app = express();
-const PORT = 5550 || process.env.DB_PORT;
+const express = require("express");
+const router = require("./routes/index");
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const server = express();
+const PORT = process.env.PORT ? process.env.PORT : 5000;
 
-app.use('/', require('./routes/index'));
+server.use(express.json());
+server.use(router);
+
+server.listen(PORT, () =>
+  console.log(`The server is running on port: ${PORT}`)
+);
